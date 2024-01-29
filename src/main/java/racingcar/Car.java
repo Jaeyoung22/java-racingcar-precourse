@@ -13,11 +13,15 @@ public class Car {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getPosition() {
         return position;
     }
 
-    public void move() {
+    public void attemptMove() {
         if (Randoms.pickNumberInRange(0, 9) >= MOVE_THRESHOLD) {
             position++;
         }
