@@ -2,8 +2,6 @@ package racingcar.io;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.Scanner;
-
 public abstract class InputHandler<T> {
 
     private static final String ERROR_PREFIX = "[ERROR] ";

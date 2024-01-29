@@ -39,7 +39,8 @@ public class Car {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append(name + " : ");
+        s.append(name);
+        s.append(" : ");
         for (int i = 0; i < position; i++) {
             s.append(POSITION_INDICATOR);
         }

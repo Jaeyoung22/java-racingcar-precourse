@@ -16,7 +16,7 @@ public class NamesInputHandler extends InputHandler<String[]> {
             throw new IllegalArgumentException(ERROR_NO_NAMES);
         }
         for (String name: names) {
-            if (name.length() == 0) {
+            if (name.isEmpty()) {
                 throw new IllegalArgumentException(ERROR_NAME_EMPTY);
             }
             if (name.length() > 5) {

@@ -1,10 +1,7 @@
 package racingcar;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Judge {
     private static final String MESSAGE_WINNER = "최종 우승자 : ";
@@ -13,8 +10,8 @@ public class Judge {
 
     public static void announceWinners(Car[] cars) {
         String winnerNames = Arrays.stream(cars)
-                .filter(car -> car.isWinner())
-                .map(car -> car.getName())
+                .filter(Car::isWinner)
+                .map(Car::getName)
                 .collect(Collectors.joining(", "));
 
         System.out.println(MESSAGE_WINNER + winnerNames);
