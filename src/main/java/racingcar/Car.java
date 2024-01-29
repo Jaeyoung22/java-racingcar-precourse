@@ -8,6 +8,7 @@ public class Car {
 
     private final String name;
     private int position = 0;
+    private boolean isWinner = false;
 
     public Car(String name) {
         this.name = name;
@@ -19,6 +20,14 @@ public class Car {
 
     public int getPosition() {
         return position;
+    }
+
+    public boolean isWinner() {
+        return isWinner;
+    }
+
+    public void setWinner(boolean winner) {
+        isWinner = winner;
     }
 
     public void attemptMove() {

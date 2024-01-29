@@ -2,6 +2,8 @@ package racingcar.io;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Scanner;
+
 public abstract class InputHandler<T> {
 
     private static final String ERROR_PREFIX = "[ERROR] ";
@@ -33,6 +35,7 @@ public abstract class InputHandler<T> {
     private String ask() {
         System.out.println(prompt);
         String rawInput = Console.readLine();
+
         try {
             validate(rawInput);
             return rawInput;

@@ -1,31 +1,39 @@
 package racingcar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Judge {
+    private static final String MESSAGE_WINNER = "최종 우승자 : ";
 
-    private final Car[] cars;
+    private Judge() {}
 
-    public Judge(Car[] cars) {
-        this.cars = cars;
+    public static void announceWinners(Car[] cars) {
+        String winnerNames = Arrays.stream(cars)
+                .filter(car -> car.isWinner())
+                .map(car -> car.getName())
+                .collect(Collectors.joining(", "));
+
+        System.out.println(MESSAGE_WINNER + winnerNames);
     }
 
-    public List<Car> findWinners() {
-        List<Car> winners = new ArrayList<>();
-
+    public static void markWinners(Car[] cars) {
         int winnerPosition = 0;
-        for (Car car: cars) {
+
+        for (Car car : cars) {
             if (car.getPosition() > winnerPosition) {
-                winners.clear();
-                winners.add(car);
-                continue;
-            }
-            if (car.getPosition() == winnerPosition) {
-                winners.add(car);
+                winnerPosition = car.getPosition();
             }
         }
 
-        return winners;
+        for (Car car : cars) {
+            if (car.getPosition() == winnerPosition) {
+                car.setWinner(true);
+            }
+        }
     }
+
 }

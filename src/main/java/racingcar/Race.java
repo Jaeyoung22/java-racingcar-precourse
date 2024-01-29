@@ -3,9 +3,6 @@ package racingcar;
 import racingcar.io.AttemptsInputHandler;
 import racingcar.io.NamesInputHandler;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class Race {
 
     private static final String MESSAGE_RESULTS = "실행 결과";
@@ -40,9 +37,8 @@ public class Race {
             printCars();
             System.out.println();
         }
-        Judge judge = new Judge(cars);
-        List<Car> winners = judge.findWinners();
-        printWinners(winners);
+        Judge.markWinners(cars);
+        Judge.announceWinners(cars);
     }
 
     private void moveCars() {
@@ -55,14 +51,6 @@ public class Race {
         for (Car car: cars) {
             System.out.println(car);
         }
-    }
-
-    private void printWinners(List<Car> winners) {
-        String winnerNames = winners.stream()
-                .map(c -> c.getName())
-                .collect(Collectors.joining(", "));
-
-        System.out.println(winnerNames);
     }
 
 }
