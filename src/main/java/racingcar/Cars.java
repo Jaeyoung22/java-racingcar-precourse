@@ -2,7 +2,6 @@ package racingcar;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +15,10 @@ public class Cars {
         this.cars = cars;
     }
 
-
     public void race() {
         for (Car car : cars) {
-            int power = Randoms.pickNumberInRange(1, 9);
+            int value = Randoms.pickNumberInRange(1, 9);
+            Power power = new Power(value);
             car.moveIfPowerEnough(power);
         }
     }

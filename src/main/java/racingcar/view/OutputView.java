@@ -1,7 +1,5 @@
 package racingcar.view;
 
-import org.mockito.internal.util.StringUtil;
-
 import java.util.List;
 import java.util.Map;
 

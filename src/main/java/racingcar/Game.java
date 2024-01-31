@@ -5,6 +5,7 @@ import racingcar.view.OutputView;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class Game {
 
@@ -19,6 +20,10 @@ public class Game {
     }
 
     public static Game getInstance() {
+        return repeat(Game::makeGame);
+    }
+
+    public static Game makeGame() {
         String names = InputView.readNames();
         Cars cars = CarsMaker.make(names);
 
@@ -28,6 +33,10 @@ public class Game {
     }
 
     public void play() {
+        repeat(this::race);
+    }
+
+    private void race() {
         if (ongoing) {
             throw new IllegalStateException("게임이 실행중입니다.");
         }
@@ -42,6 +51,10 @@ public class Game {
     }
 
     public void end() {
+        repeat(this::quit);
+    }
+
+    private void quit() {
         if (!ongoing) {
             throw new IllegalStateException("게임이 실행되지 않았습니다.");
         }
@@ -50,5 +63,23 @@ public class Game {
 
         List<String> winners = cars.fetchWinners();
         OutputView.printWinner(winners);
+    }
+
+    private static <T> T repeat(Supplier<T> target) {
+        try {
+            return target.get();
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMsg(e);
+            return repeat(target);
+        }
+    }
+
+    private void repeat(Runnable target) {
+        try {
+            target.run();
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMsg(e);
+            repeat(target);
+        }
     }
 }

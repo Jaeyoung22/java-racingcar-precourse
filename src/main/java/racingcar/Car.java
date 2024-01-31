@@ -1,39 +1,42 @@
 package racingcar;
 
+import java.util.Objects;
+
 public class Car {
 
-    private static final int THRESHOLD = 4;
+    private final CarName name;
 
-    private final String name;
+    private Position position;
 
-    private int position = 0;
-
-    private Car(String name) {
-        this.name = name;
+    public Car(String name) {
+        this.name = CarName.from(name);
+        this.position = new Position(0);
     }
 
-    public static Car from(String name) {
-        validate(name);
-        return new Car(name);
-    }
-
-    private static void validate(String name) {
-        if (name.length() > 5) {
-            throw new IllegalArgumentException("이름은 5자 이하만 가능합니다.");
-        }
-    }
-
-    public void moveIfPowerEnough(int power) {
-        if (power >= THRESHOLD) {
-            position += 1;
+    public void moveIfPowerEnough(Power power) {
+        if (power.isEnough()) {
+            position = position.proceed();
         }
     }
 
     public String getName() {
-        return name;
+        return name.getValue();
     }
 
     public int getPosition() {
-        return position;
+        return position.getValue();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return Objects.equals(name, car.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
