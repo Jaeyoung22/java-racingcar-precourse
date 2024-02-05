@@ -7,11 +7,11 @@ public class Car {
     private int position = 0;
 
     public Car(String name) {
+        validate(name);
         this.name = name;
-        validate();
     }
 
-    private void validate() {
+    private void validate(String name) {
         if (name.length() > 5) {
             throw new IllegalArgumentException("[ERROR] 이름은 5자 이하이어야 합니다.");
         }
