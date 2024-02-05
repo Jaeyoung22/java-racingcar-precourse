@@ -7,22 +7,36 @@ public class RacingController {
     private final CarHandler carHandler = new CarHandler();
 
     public void run() {
-        try{
-            carHandler.addCar(RacingView.inputCarName());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        try {
-            processRacing(validate(RacingView.inputTryNum()));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
+        startRacing();
+        processRacing();
         RacingView.outputWinner(carHandler.getFirstCarName());
     }
 
-    private void processRacing(int tryNum) {
+    private void startRacing() {
+        boolean ready = false;
+        while (!ready) {
+            try{
+                carHandler.addCar(RacingView.inputCarName());
+                ready = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void processRacing() {
+        boolean ready = false;
+        while (!ready) {
+            try {
+                moveRacingCar(validate(RacingView.inputTryNum()));
+                ready = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void moveRacingCar(int tryNum) {
         RacingView.outputProcessStart();
         for (int i = 0; i<tryNum; i++) {
             RacingView.outputProcess(carHandler.moveCar());
