@@ -15,7 +15,7 @@ class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
 
     @Test
-    @DisplayName("README 테스트케이스")
+    @DisplayName("최종 우승자 출력")
     void readme() {
         assertRandomNumberInRangeTest(
                 () -> {
@@ -45,7 +45,8 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 전진_정지() {
+    @DisplayName("전진 정지")
+    void moveOrStop() {
         assertRandomNumberInRangeTest(
             () -> {
                 run("pobi,woni", "1");
@@ -56,7 +57,8 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 이름에_대한_예외_처리() {
+    @DisplayName("예외처리: 5글자 이상의 이름")
+    void nameTooLong() {
         assertSimpleTest(
             () -> {
                 runException("pobi,javaji");
