@@ -1,6 +1,7 @@
 package racingcar;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
@@ -14,7 +15,38 @@ class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
 
     @Test
-    void 전진_정지() {
+    @DisplayName("최종 우승자 출력")
+    void readme() {
+        assertRandomNumberInRangeTest(
+                () -> {
+                    run("pobi,woni,jun", "5");
+                    assertThat(output()).contains("최종 우승자 : pobi, jun");
+                },
+                MOVING_FORWARD,
+                STOP,
+                MOVING_FORWARD,
+
+                MOVING_FORWARD,
+                MOVING_FORWARD,
+                MOVING_FORWARD,
+
+                MOVING_FORWARD,
+                MOVING_FORWARD,
+                MOVING_FORWARD,
+
+                MOVING_FORWARD,
+                MOVING_FORWARD,
+                MOVING_FORWARD,
+
+                MOVING_FORWARD,
+                MOVING_FORWARD,
+                MOVING_FORWARD
+        );
+    }
+
+    @Test
+    @DisplayName("전진 정지")
+    void moveOrStop() {
         assertRandomNumberInRangeTest(
             () -> {
                 run("pobi,woni", "1");
@@ -25,7 +57,8 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 이름에_대한_예외_처리() {
+    @DisplayName("예외처리: 5글자 이상의 이름")
+    void nameTooLong() {
         assertSimpleTest(
             () -> {
                 runException("pobi,javaji");
