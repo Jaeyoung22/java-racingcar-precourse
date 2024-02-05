@@ -1,8 +1,12 @@
 package racingcar;
 
+import racingcar.model.Race;
+
 public class Application {
     public static void main(String[] args) {
-        Race race = Race.createRace();
+
+        Race race = new Race();
         race.start();
+
     }
 }
